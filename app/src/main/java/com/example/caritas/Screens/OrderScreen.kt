@@ -15,15 +15,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,27 +44,31 @@ import androidx.navigation.NavController
 import com.example.caritas.R
 import kotlin.system.exitProcess
 
-@OptIn(ExperimentalMaterial3Api::class)
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
 @Composable
-fun HomeScreen(navController: NavController ){
+fun OrderScreen(){
+
+    var nombre by remember { mutableStateOf("") }
+
     Column (modifier = Modifier
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-       TopAppBar(
-           colors = TopAppBarDefaults.topAppBarColors(
-               containerColor = Color(0xFF66BFFF)
-           ),
-           title = { Text(text = "Inicio", ) },
-           navigationIcon = {
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color(0xFF66BFFF)
+            ),
+            title = { Text(text = "Pedido", ) },
+            navigationIcon = {
                 IconButton(onClick = {
-                    exitProcess(0) // Cierra la aplicación
+
                 }) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
                 }
-           },
-           actions = {
+            },
+            actions = {
                 Image(
                     painter = painterResource(id= R.drawable.logo),
                     contentDescription = "",
@@ -67,8 +78,8 @@ fun HomeScreen(navController: NavController ){
                         .clip(RoundedCornerShape(24.dp))
                         .padding(4.dp),
                 )
-           }
-       )
+            }
+        )
         LazyColumn (
             modifier = Modifier
                 .fillMaxWidth()
@@ -77,27 +88,47 @@ fun HomeScreen(navController: NavController ){
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-            item {
-                Text("No Hay Pedidos", fontSize = 32.sp, modifier = Modifier.padding(40.dp))
+            item{
+                Text("Datos del Cliente:", fontSize = 24.sp)
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = { nombre = it },
+                    label = { Text("Nombre") },
+                    modifier = Modifier.padding(8.dp)
+                        .fillMaxWidth()
+                )
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = { nombre = it },
+                    label = { Text("Panadería") },
+                    modifier = Modifier.padding(8.dp)
+                        .fillMaxWidth()
+                )
             }
             item {
-                Button(onClick = {},
-                        modifier = Modifier.padding(8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF66BFFF),
-                            contentColor = Color.Black
-                        ),
-                        shape = RoundedCornerShape(8.dp), // Bordes redondeados
-                        border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
-                    ) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = null,
-                            modifier = Modifier.padding(8.dp),
-                            Color.White)
+                Button(
+                    onClick = {},
+                    modifier = Modifier.padding(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF66BFFF),
+                        contentColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape(8.dp), // Bordes redondeados
+                    border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = null,
+                        modifier = Modifier.padding(8.dp)
+                            .size(24.dp),
+                        Color.White
+                    )
                     Text("Agregar Pedido")
                 }
             }
             item {
-                Button(onClick = {},
+                Button(
+                    onClick = {},
                     modifier = Modifier.padding(8.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF66BFFF),
@@ -106,32 +137,14 @@ fun HomeScreen(navController: NavController ){
                     shape = RoundedCornerShape(8.dp), // Bordes redondeados
                     border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.lprecios,),
+                    Icon(
+                        imageVector = Icons.Filled.Done,
                         contentDescription = null,
                         modifier = Modifier.padding(8.dp)
                             .size(24.dp),
-                        Color.White)
-                    Text("Tabla de Precios")
-                }
-            }
-            item {
-                Button(onClick = {
-
-                },
-                    modifier = Modifier.padding(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF66BFFF),
-                        contentColor = Color.Black
-                    ),
-                    shape = RoundedCornerShape(8.dp), // Bordes redondeados
-                    border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
-                ) {
-                    Icon(painter = painterResource(id = R.drawable.galery,),
-                        contentDescription = null,
-                        modifier = Modifier.padding(8.dp)
-                                    .size(24.dp),
-                        Color.White)
-                    Text("Galería")
+                        Color.White
+                    )
+                    Text("Confirmar Pedido")
                 }
             }
         }

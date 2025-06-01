@@ -14,5 +14,8 @@ fun Nav(){
         composable(route = "Home") {
             HomeScreen(navController = NavController)
         }
+        composable(route = "Galery") {
+
+        }
     }
 }

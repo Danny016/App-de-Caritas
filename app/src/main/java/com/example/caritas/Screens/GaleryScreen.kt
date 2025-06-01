@@ -37,27 +37,28 @@ import androidx.navigation.NavController
 import com.example.caritas.R
 import kotlin.system.exitProcess
 
-@OptIn(ExperimentalMaterial3Api::class)
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
 @Composable
-fun HomeScreen(navController: NavController ){
+fun GaleryScreen(){
     Column (modifier = Modifier
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-       TopAppBar(
-           colors = TopAppBarDefaults.topAppBarColors(
-               containerColor = Color(0xFF66BFFF)
-           ),
-           title = { Text(text = "Inicio", ) },
-           navigationIcon = {
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color(0xFF66BFFF)
+            ),
+            title = { Text(text = "Galería", ) },
+            navigationIcon = {
                 IconButton(onClick = {
-                    exitProcess(0) // Cierra la aplicación
+
                 }) {
                     Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
                 }
-           },
-           actions = {
+            },
+            actions = {
                 Image(
                     painter = painterResource(id= R.drawable.logo),
                     contentDescription = "",
@@ -67,8 +68,8 @@ fun HomeScreen(navController: NavController ){
                         .clip(RoundedCornerShape(24.dp))
                         .padding(4.dp),
                 )
-           }
-       )
+            }
+        )
         LazyColumn (
             modifier = Modifier
                 .fillMaxWidth()
@@ -78,26 +79,8 @@ fun HomeScreen(navController: NavController ){
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             item {
-                Text("No Hay Pedidos", fontSize = 32.sp, modifier = Modifier.padding(40.dp))
-            }
-            item {
-                Button(onClick = {},
-                        modifier = Modifier.padding(8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF66BFFF),
-                            contentColor = Color.Black
-                        ),
-                        shape = RoundedCornerShape(8.dp), // Bordes redondeados
-                        border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
-                    ) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = null,
-                            modifier = Modifier.padding(8.dp),
-                            Color.White)
-                    Text("Agregar Pedido")
-                }
-            }
-            item {
-                Button(onClick = {},
+                Button(
+                    onClick = {},
                     modifier = Modifier.padding(8.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF66BFFF),
@@ -106,32 +89,14 @@ fun HomeScreen(navController: NavController ){
                     shape = RoundedCornerShape(8.dp), // Bordes redondeados
                     border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.lprecios,),
+                    Icon(
+                        imageVector = Icons.Filled.Add,
                         contentDescription = null,
                         modifier = Modifier.padding(8.dp)
                             .size(24.dp),
-                        Color.White)
-                    Text("Tabla de Precios")
-                }
-            }
-            item {
-                Button(onClick = {
-
-                },
-                    modifier = Modifier.padding(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF66BFFF),
-                        contentColor = Color.Black
-                    ),
-                    shape = RoundedCornerShape(8.dp), // Bordes redondeados
-                    border = BorderStroke(2.dp, Color.Black), // Borde negro de 2dp
-                ) {
-                    Icon(painter = painterResource(id = R.drawable.galery,),
-                        contentDescription = null,
-                        modifier = Modifier.padding(8.dp)
-                                    .size(24.dp),
-                        Color.White)
-                    Text("Galería")
+                        Color.White
+                    )
+                    Text("Agregar Imágen")
                 }
             }
         }
